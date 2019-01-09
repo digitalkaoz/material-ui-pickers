@@ -84,6 +84,7 @@ export interface DateTextFieldProps
   minDate?: DateType;
   /** Error message, shown if date is less then minimal date */
   minDateMessage?: React.ReactNode;
+  label?: string;
   disablePast?: boolean;
   disableFuture?: boolean;
   maxDate?: DateType;
@@ -142,6 +143,7 @@ export class DateTextField extends React.PureComponent<DateTextFieldProps> {
     disableFuture: PropTypes.bool,
     format: PropTypes.string,
     onBlur: PropTypes.func,
+    label: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     onClear: PropTypes.func,
     onClick: PropTypes.func.isRequired,
@@ -323,6 +325,7 @@ export class DateTextField extends React.PureComponent<DateTextFieldProps> {
       InputProps,
       invalidDateMessage,
       invalidLabel,
+      label,
       keyboard,
       keyboardIcon,
       labelFunc,
@@ -357,7 +360,7 @@ export class DateTextField extends React.PureComponent<DateTextFieldProps> {
     if (keyboard) {
       localInputProps[`${adornmentPosition}Adornment`] = (
         <InputAdornment position={adornmentPosition!} {...InputAdornmentProps}>
-          <IconButton disabled={disabled} onClick={this.openPicker}>
+          <IconButton disabled={disabled} aria-label={`Pick ${label}`} onClick={this.openPicker}>
             <Icon> {keyboardIcon} </Icon>
           </IconButton>
         </InputAdornment>
